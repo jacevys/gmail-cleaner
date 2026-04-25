@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# uv / virtualenv
+.venv/
+venv/
+.python-version
+
+# Sensitive files
+credentials.json
+token.json
+*.env
+.env*
+
+# Editor
+*.swp
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
