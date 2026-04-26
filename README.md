@@ -61,3 +61,9 @@ uv run python main.py senders --limit 20
 | `--exclude-subject` | 排除含此關鍵字的郵件（可多次使用） | `--exclude-subject 收據` |
 | `--limit` | 限制數量 | `100` |
 | `--dry-run` | 模擬執行，不實際刪除 | — |
+
+## 注意事項
+
+> **警告：郵件刪除後無法復原。**
+>
+> 執行 `delete` 前，請務必先以 `list` 或 `--dry-run` 確認符合條件的郵件皆為預期刪除的對象。本工具依過濾條件批次刪除郵件，作者不對任何誤刪造成的資料損失負責。
