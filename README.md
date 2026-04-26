@@ -40,7 +40,15 @@ uv run python main.py list --from newsletter@example.com --older-than 1y --limit
 ```bash
 uv run python main.py delete --from medium.com --older-than 30d
 uv run python main.py delete --subject "優惠" --dry-run   # 模擬，不實際刪除
+
+# 排除特定主旨關鍵字（保留中獎通知，刪除其餘）
+uv run python main.py delete --from example.com --exclude-subject "中獎" --dry-run
+
+# 排除多個關鍵字
+uv run python main.py delete --from example.com --exclude-subject "中獎" --exclude-subject "收據" --dry-run
 ```
+
+> **注意：** `--exclude-subject` 使用 Gmail 的詞語匹配，需填入完整詞語（如 `中獎通知`），不支援模糊字串比對。建議先加 `--dry-run` 確認排除結果正確後再正式刪除。
 
 ### `senders` — 寄件人統計
 
