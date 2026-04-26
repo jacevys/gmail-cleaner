@@ -35,11 +35,18 @@ uv run python main.py list --from newsletter@example.com --older-than 1y --limit
 
 ### `delete` — 批次刪除
 
-刪除前會顯示數量、日期範圍與前 5 封預覽，並要求確認。
+建議操作流程：先用 `list` 確認範圍，再加 `--dry-run` 模擬，最後正式執行。
+
+**Step 1** — 用 `list` 預覽符合條件的郵件：
 
 ```bash
-uv run python main.py delete --from medium.com --older-than 30d
-uv run python main.py delete --subject "優惠" --dry-run   # 模擬，不實際刪除
+uv run python main.py list --from medium.com --older-than 30d
+```
+
+**Step 2** — 加上 `--dry-run` 模擬刪除，不實際刪除：
+
+```bash
+uv run python main.py delete --from medium.com --older-than 30d --dry-run
 
 # 排除特定主旨關鍵字（保留中獎通知，刪除其餘）
 uv run python main.py delete --from example.com --exclude-subject "中獎" --dry-run
@@ -48,7 +55,14 @@ uv run python main.py delete --from example.com --exclude-subject "中獎" --dry
 uv run python main.py delete --from example.com --exclude-subject "中獎" --exclude-subject "收據" --dry-run
 ```
 
-> **注意：** `--exclude-subject` 使用 Gmail 的詞語匹配，需填入完整詞語（如 `中獎通知`），不支援模糊字串比對。建議先加 `--dry-run` 確認排除結果正確後再正式刪除。
+> **注意：** `--exclude-subject` 使用 Gmail 的詞語匹配，需填入完整詞語（如 `中獎通知`），不支援模糊字串比對。
+
+**Step 3** — 確認無誤後正式刪除（刪除前會顯示數量、日期範圍與前 5 封預覽，並要求確認）：
+
+```bash
+uv run python main.py delete --from medium.com --older-than 30d
+uv run python main.py delete --subject "優惠"
+```
 
 ### `senders` — 寄件人統計
 
