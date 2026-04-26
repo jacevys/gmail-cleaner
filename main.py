@@ -111,14 +111,13 @@ def delete(sender, subject, older_than, exclude_subject, limit, dry_run):
 def senders(limit):
     """統計信箱中每個寄件人的郵件數量"""
     creds = get_credentials()
-    service = build_service(creds)
 
     click.echo("掃描中，請稍候...")
 
     def on_progress(done, total):
         click.echo(f"\r處理中：{done}/{total}", nl=False)
 
-    results = get_senders(service, on_progress=on_progress)
+    results = get_senders(creds, on_progress=on_progress)
     click.echo()
 
     name_w, email_w = 30, 35
